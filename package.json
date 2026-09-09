@@ -1,0 +1,19 @@
+{
+  "name": "desktop-water-pet",
+  "version": "2.0.0",
+  "description": "Cute Desktop Water Pet",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^43.1.0"
+  },
+  "dependencies": {
+    "electron-store": "^11.0.2"
+  }
+}

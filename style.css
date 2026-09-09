@@ -1,0 +1,920 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    /* Theme colors (fallback = Light, before JS applies real theme) */
+    --bubble-bg: #ffffff;
+    --bubble-text: #2b2b2b;
+    --bubble-muted-text: #666666;
+    --accent: #4fb0ff;
+    --accent-hover: #2f9bff;
+    --snooze-bg: #eeeeee;
+    --snooze-bg-hover: #dddddd;
+    --menu-item-hover: #f2f2f2;
+    --menu-separator: #eeeeee;
+    --game-header-bg: #fff7ec;
+    --game-area-bg-start: #eaf6ff;
+    --game-area-bg-end: #ffffff;
+    --game-score-bg: rgba(255,255,255,0.85);
+    --game-score-text: #555555;
+
+    /* Bubble shape (Modern = default) */
+    --bubble-radius: 22px;
+    --bubble-shadow: 0 8px 22px rgba(0,0,0,0.20);
+    --bubble-border: none;
+}
+
+/* -------------------- */
+/* Themes                */
+/* -------------------- */
+
+/* Light — clean white background, bright bubbles */
+body[data-theme="light"]{
+    --bubble-bg: #ffffff;
+    --bubble-text: #2b2b2b;
+    --bubble-muted-text: #666666;
+    --accent: #4fb0ff;
+    --accent-hover: #2f9bff;
+    --snooze-bg: #eeeeee;
+    --snooze-bg-hover: #dddddd;
+    --menu-item-hover: #f2f2f2;
+    --menu-separator: #eeeeee;
+    --game-header-bg: #fff7ec;
+    --game-area-bg-start: #eaf6ff;
+    --game-area-bg-end: #ffffff;
+    --game-score-bg: rgba(255,255,255,0.85);
+    --game-score-text: #555555;
+}
+
+/* Dark — comfortable dark grey, easy on the eyes */
+body[data-theme="dark"]{
+    --bubble-bg: #2b2b30;
+    --bubble-text: #f0f0f0;
+    --bubble-muted-text: #b5b5bd;
+    --accent: #5fb8ff;
+    --accent-hover: #3fa4ff;
+    --snooze-bg: #3d3d44;
+    --snooze-bg-hover: #4a4a52;
+    --menu-item-hover: #3a3a41;
+    --menu-separator: #46464e;
+    --game-header-bg: #33333a;
+    --game-area-bg-start: #26262c;
+    --game-area-bg-end: #2b2b30;
+    --game-score-bg: rgba(0,0,0,0.45);
+    --game-score-text: #f0f0f0;
+}
+
+/* Midnight — near-black navy with a subtle starry glow */
+body[data-theme="midnight"]{
+    --bubble-bg: #171b32;
+    --bubble-text: #e8ebff;
+    --bubble-muted-text: #9098c9;
+    --accent: #8a7dff;
+    --accent-hover: #7466f0;
+    --snooze-bg: #232849;
+    --snooze-bg-hover: #2c3258;
+    --menu-item-hover: #232849;
+    --menu-separator: #2e335a;
+    --game-header-bg: #1f2447;
+    --game-area-bg-start: #10122a;
+    --game-area-bg-end: #171b32;
+    --game-score-bg: rgba(0,0,0,0.5);
+    --game-score-text: #e8ebff;
+}
+
+body[data-theme="midnight"] .bubble-content,
+body[data-theme="midnight"] .menu-content,
+body[data-theme="midnight"] .game-bubble{
+    background-image:
+        radial-gradient(circle at 18% 25%, rgba(255,255,255,0.55) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 68% 18%, rgba(255,255,255,0.4) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 82% 55%, rgba(255,255,255,0.5) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 35% 75%, rgba(255,255,255,0.35) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 55% 45%, rgba(255,255,255,0.3) 0 1px, transparent 1.5px);
+    background-color: var(--bubble-bg);
+    box-shadow: var(--bubble-shadow), 0 0 16px rgba(138,125,255,0.45);
+}
+
+/* Pastel — soft pink/purple/blue cute aesthetic */
+body[data-theme="pastel"]{
+    --bubble-bg: #fff0f6;
+    --bubble-text: #6a3b57;
+    --bubble-muted-text: #a97a94;
+    --accent: #d6a6f0;
+    --accent-hover: #c98ce8;
+    --snooze-bg: #ffe1ee;
+    --snooze-bg-hover: #ffd0e3;
+    --menu-item-hover: #ffe6f1;
+    --menu-separator: #ffd9ea;
+    --game-header-bg: #f3e6ff;
+    --game-area-bg-start: #fff0f6;
+    --game-area-bg-end: #f3e6ff;
+    --game-score-bg: rgba(255,255,255,0.85);
+    --game-score-text: #6a3b57;
+}
+
+/* Nature — green leafy tones */
+body[data-theme="nature"]{
+    --bubble-bg: #eefbf0;
+    --bubble-text: #1f4d33;
+    --bubble-muted-text: #5c8a70;
+    --accent: #4caf7d;
+    --accent-hover: #3d9b6a;
+    --snooze-bg: #dcf3e2;
+    --snooze-bg-hover: #cbeed4;
+    --menu-item-hover: #dcf3e2;
+    --menu-separator: #cdeed7;
+    --game-header-bg: #e2f7e6;
+    --game-area-bg-start: #eefbf0;
+    --game-area-bg-end: #ffffff;
+    --game-score-bg: rgba(255,255,255,0.85);
+    --game-score-text: #1f4d33;
+}
+
+/* Custom — user-defined colors are applied as inline CSS variables via JS,
+   these are just sane fallbacks until that runs */
+body[data-theme="custom"]{
+    --bubble-bg: #ffffff;
+    --bubble-text: #2b2b2b;
+    --bubble-muted-text: #666666;
+    --accent: #4fb0ff;
+    --accent-hover: #2f9bff;
+    --snooze-bg: #eeeeee;
+    --snooze-bg-hover: #dddddd;
+    --menu-item-hover: #f2f2f2;
+    --menu-separator: #eeeeee;
+    --game-header-bg: #f5f5f5;
+    --game-area-bg-start: #f5f5f5;
+    --game-area-bg-end: #ffffff;
+    --game-score-bg: rgba(255,255,255,0.85);
+    --game-score-text: #555555;
+}
+
+/* -------------------- */
+/* Bubble Styles                                                        */
+/* Controls the shape of .bubble-content + the little .bubble-tail below */
+/* it (the tail's own ::before/::after add extra puffs/dots per style)   */
+/* -------------------- */
+
+/* 💬 Speech — classic comic-style box, crisp corners, bordered, single tail */
+body[data-bubble-style="speech"]{
+    --bubble-radius: 8px;
+    --bubble-shadow: 0 3px 8px rgba(0,0,0,0.16);
+    --bubble-border: 1.5px solid rgba(0,0,0,0.22);
+}
+
+/* 🎨 Modern — clean rounded card, no border, soft big shadow (default) */
+body[data-bubble-style="modern"]{
+    --bubble-radius: 22px;
+    --bubble-shadow: 0 8px 22px rgba(0,0,0,0.20);
+    --bubble-border: none;
+}
+
+/* ✨ Minimal — just text + emoji, no background/shadow/tail at all */
+body[data-bubble-style="minimal"] .bubble-content{
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 2px 4px;
+}
+
+body[data-bubble-style="minimal"] .bubble-tail{
+    display: none;
+}
+
+body[data-bubble-style="minimal"] .bubble-content p,
+body[data-bubble-style="minimal"] .bubble-emoji{
+    text-shadow: 0 1px 3px rgba(0,0,0,0.35);
+}
+
+/* ☁️ Cloud — fluffy blob shape with puffy circle "stem" instead of a tail */
+body[data-bubble-style="cloud"] .bubble-content,
+body[data-bubble-style="cloud"] .menu-content,
+body[data-bubble-style="cloud"] .game-bubble{
+    border-radius: 46% 46% 42% 42% / 62% 62% 38% 38%;
+}
+
+body[data-bubble-style="cloud"] .bubble-tail{
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    transform: none;
+    bottom: -8px;
+    left: 44%;
+}
+
+body[data-bubble-style="cloud"] .bubble-tail::before,
+body[data-bubble-style="cloud"] .bubble-tail::after{
+    content: "";
+    position: absolute;
+    background: var(--bubble-bg);
+    border-radius: 50%;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.08);
+}
+
+body[data-bubble-style="cloud"] .bubble-tail::before{
+    width: 7px;
+    height: 7px;
+    bottom: -9px;
+    left: -7px;
+}
+
+body[data-bubble-style="cloud"] .bubble-tail::after{
+    width: 4px;
+    height: 4px;
+    bottom: -15px;
+    left: -11px;
+}
+
+/* 💭 Thought — oval pill shape with a trail of shrinking circles (dreamy) */
+body[data-bubble-style="thought"] .bubble-content,
+body[data-bubble-style="thought"] .menu-content,
+body[data-bubble-style="thought"] .game-bubble{
+    border-radius: 50px;
+}
+
+body[data-bubble-style="thought"] .bubble-tail{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transform: none;
+    bottom: -10px;
+    left: 40%;
+}
+
+body[data-bubble-style="thought"] .bubble-tail::before,
+body[data-bubble-style="thought"] .bubble-tail::after{
+    content: "";
+    position: absolute;
+    background: var(--bubble-bg);
+    border-radius: 50%;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.08);
+}
+
+body[data-bubble-style="thought"] .bubble-tail::before{
+    width: 8px;
+    height: 8px;
+    bottom: -12px;
+    left: -10px;
+}
+
+body[data-bubble-style="thought"] .bubble-tail::after{
+    width: 5px;
+    height: 5px;
+    bottom: -20px;
+    left: -16px;
+}
+
+/* Force-thought: applied to #reaction-bubble specifically for Lonely/Sleepy
+   reactions, regardless of the user's chosen bubble style. The extra ID
+   specificity makes sure this always wins over the body[data-bubble-style]
+   rules above. */
+body[data-bubble-style] #reaction-bubble.force-thought .bubble-content{
+    border-radius: 50px;
+}
+
+body[data-bubble-style] #reaction-bubble.force-thought .bubble-tail{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transform: none;
+    bottom: -10px;
+    left: 40%;
+}
+
+body[data-bubble-style] #reaction-bubble.force-thought .bubble-tail::before,
+body[data-bubble-style] #reaction-bubble.force-thought .bubble-tail::after{
+    content: "";
+    position: absolute;
+    background: var(--bubble-bg);
+    border-radius: 50%;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.08);
+}
+
+body[data-bubble-style] #reaction-bubble.force-thought .bubble-tail::before{
+    width: 8px;
+    height: 8px;
+    bottom: -12px;
+    left: -10px;
+}
+
+body[data-bubble-style] #reaction-bubble.force-thought .bubble-tail::after{
+    width: 5px;
+    height: 5px;
+    bottom: -20px;
+    left: -16px;
+}
+
+body{
+    background:transparent;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    height:100vh;
+}
+
+#pet-wrapper{
+    position: relative;
+}
+
+#pet-wrapper.float-enabled{
+    animation: float 2.5s ease-in-out infinite;
+}
+
+#pet-wrapper.sleeping{
+    animation: floatSlow 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(-20px); }
+    100%{ transform: translateY(0px); }
+}
+
+@keyframes floatSlow {
+    0%{ transform: translateY(0px); }
+    50%{ transform: translateY(-8px); }
+    100%{ transform: translateY(0px); }
+}
+
+#pet{
+    width: 90px;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+    cursor: default;
+}
+
+#pet-visual{
+    position: relative;
+    display: block;
+}
+
+#pet-visual.jump{
+    animation: jump 0.5s ease;
+}
+
+@keyframes jump{
+    0%{ transform: translateY(0); }
+    50%{ transform: translateY(-40px); }
+    100%{ transform: translateY(0); }
+}
+
+#hearts{
+    position: absolute;
+    left: 50%;
+    top: -20px;
+    transform: translateX(-50%);
+    pointer-events: none;
+    width:100px;
+    height:100px;
+}
+
+.heart{
+    position: absolute;
+    font-size:22px;
+    animation: floatHeart 1.5s ease forwards;
+    color:red;
+}
+
+@keyframes floatHeart{
+    0%{
+        opacity:1;
+        transform:translate(0,0) scale(1);
+    }
+    100%{
+        opacity:0;
+        transform:translateY(-70px) scale(1.5);
+    }
+}
+
+/* -------------------- */
+/* Water / Reaction Bubble */
+/* -------------------- */
+
+.water-bubble{
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-bottom: 8px;
+    width: max-content;
+    max-width: 140px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(10px) scale(0.85);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 10;
+}
+
+.water-bubble.show{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.bubble-content{
+    background: var(--bubble-bg);
+    border-radius: var(--bubble-radius);
+    border: var(--bubble-border);
+    padding: 10px 12px;
+    box-shadow: var(--bubble-shadow);
+    text-align: center;
+}
+
+.bubble-emoji{
+    font-size: 20px;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.bubble-content p{
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--bubble-text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.bubble-actions{
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+}
+
+.bubble-actions button{
+    border: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#water-done{
+    background: var(--accent);
+    color: #fff;
+}
+
+#water-done:hover{
+    background: var(--accent-hover);
+}
+
+#water-snooze{
+    background: var(--snooze-bg);
+    color: var(--bubble-muted-text);
+}
+
+#water-snooze:hover{
+    background: var(--snooze-bg-hover);
+}
+
+.bubble-tail{
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background: var(--bubble-bg);
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.08);
+}
+
+/* -------------------- */
+/* Sleep Mode Zzz Stack */
+/* -------------------- */
+
+.sleep-bubble{
+    position: absolute;
+    bottom: 65%;
+    left: 60%;
+    width: 90px;
+    height: 90px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+#zzz-container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.zzz-particle{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-weight: 700;
+    color: #6a8fc9;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.12);
+    opacity: 0;
+    animation: zzzFloat 2.2s ease-in forwards;
+}
+
+@keyframes zzzFloat {
+    0%{
+        opacity: 0;
+        transform: translate(0, 0) scale(0.6) rotate(-8deg);
+    }
+    15%{ opacity: 1; }
+    80%{ opacity: 1; }
+    100%{
+        opacity: 0;
+        transform: translate(38px, -55px) scale(1.3) rotate(-8deg);
+    }
+}
+
+/* -------------------- */
+/* Mouse Follow Eyes */
+/* -------------------- */
+
+#pet-visual{
+    --eye-lx: 38.8%;
+    --eye-ly: 31.9%;
+    --eye-rx: 75.8%;
+    --eye-ry: 36.9%;
+    --eye-w: 22%;
+    --eye-h: 20%;
+    --eye-patch-color1: #fbd2c4;
+    --eye-patch-color2: #f6c0b0;
+    --pupil-w: 13%;
+    --pupil-h: 12%;
+    --pupil-color: #241318;
+}
+
+.eye-patch{
+    position: absolute;
+    width: var(--eye-w);
+    height: var(--eye-h);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 4;
+    background: radial-gradient(closest-side, var(--eye-patch-color1) 55%, var(--eye-patch-color2) 80%, transparent 100%);
+}
+
+#patch-left{
+    left: var(--eye-lx);
+    top: var(--eye-ly);
+    transform: translate(-50%, -50%);
+}
+
+#patch-right{
+    left: var(--eye-rx);
+    top: var(--eye-ry);
+    transform: translate(-50%, -50%);
+}
+
+.eye-drawn{
+    position: absolute;
+    width: var(--pupil-w);
+    height: var(--pupil-h);
+    border-radius: 50%;
+    background: var(--pupil-color);
+    pointer-events: none;
+    z-index: 5;
+    --offsetX: 0px;
+    --offsetY: 0px;
+    transition: transform 0.08s ease-out;
+}
+
+.eye-drawn::after{
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 22%;
+    width: 35%;
+    height: 35%;
+    background: #ffffff;
+    border-radius: 50%;
+    opacity: 0.9;
+}
+
+#eye-left{
+    left: var(--eye-lx);
+    top: var(--eye-ly);
+    transform: translate(calc(-50% + var(--offsetX)), calc(-50% + var(--offsetY)));
+}
+
+#eye-right{
+    left: var(--eye-rx);
+    top: var(--eye-ry);
+    transform: translate(calc(-50% + var(--offsetX)), calc(-50% + var(--offsetY)));
+}
+
+.eye-patch.hidden,
+.eye-drawn.hidden{
+    opacity: 0;
+}
+
+/* Eyelid lines — CSS-only "closed eyes" for skins that don't have a
+   dedicated closed-eyes image (blink/sleep use this instead of an image swap) */
+.eyelid-line{
+    position: absolute;
+    width: var(--pupil-w);
+    height: 3px;
+    min-width: 8px;
+    border-radius: 2px;
+    background: var(--pupil-color);
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+}
+
+#eyelid-left{
+    left: var(--eye-lx);
+    top: var(--eye-ly);
+}
+
+#eyelid-right{
+    left: var(--eye-rx);
+    top: var(--eye-ry);
+}
+
+.eyelid-line.show{
+    opacity: 1;
+}
+
+/* -------------------- */
+/* Feed System — Right Click Bubble Menu */
+/* -------------------- */
+
+.menu-bubble{
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-bottom: 8px;
+    width: max-content;
+    min-width: 130px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(10px) scale(0.85);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 20;
+}
+
+.menu-bubble.show{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.menu-content{
+    background: var(--bubble-bg);
+    border-radius: var(--bubble-radius);
+    border: var(--bubble-border);
+    padding: 6px;
+    box-shadow: var(--bubble-shadow);
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item{
+    border: none;
+    background: transparent;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bubble-text);
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.menu-item:hover{
+    background: var(--menu-item-hover);
+}
+
+.menu-item[data-action="exit"]{
+    color: #d64545;
+}
+
+.menu-separator{
+    border: none;
+    border-top: 1px solid var(--menu-separator);
+    margin: 4px 2px;
+}
+
+.menu-bubble .bubble-tail{
+    background: var(--bubble-bg);
+}
+
+/* -------------------- */
+/* Mood System */
+/* -------------------- */
+
+#mood-badge{
+    position: absolute;
+    top: -4px;
+    right: -2px;
+    width: 20px;
+    height: 20px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bubble-bg);
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    z-index: 6;
+    transform: scale(1);
+    transition: transform 0.2s ease;
+}
+
+#mood-badge.pop{
+    animation: moodPop 0.35s ease;
+}
+
+@keyframes moodPop{
+    0%{ transform: scale(0.6) rotate(-10deg); }
+    50%{ transform: scale(1.25) rotate(6deg); }
+    100%{ transform: scale(1) rotate(0deg); }
+}
+
+/* -------------------- */
+/* Walking Animation */
+/* -------------------- */
+
+#pet-visual{
+    --dir: 1;
+}
+
+#pet-visual.walking{
+    animation: waddle 0.4s ease-in-out infinite;
+}
+
+@keyframes waddle{
+    0%{ transform: scaleX(var(--dir)) rotate(0deg); }
+    25%{ transform: scaleX(var(--dir)) rotate(-6deg); }
+    75%{ transform: scaleX(var(--dir)) rotate(6deg); }
+    100%{ transform: scaleX(var(--dir)) rotate(0deg); }
+}
+
+/* Drop Bounce — drag chhodne par, sirf position bounce, koi squash-stretch nahi */
+#pet-visual.pet-drop{
+    animation: petDrop 0.7s both;
+}
+
+@keyframes petDrop{
+    0%{
+        transform: scaleX(var(--dir)) translateY(0);
+        animation-timing-function: ease-in;
+    }
+    25%{
+        transform: scaleX(var(--dir)) translateY(-18px);
+        animation-timing-function: ease-out;
+    }
+    45%{
+        transform: scaleX(var(--dir)) translateY(0);
+        animation-timing-function: ease-in;
+    }
+    62%{
+        transform: scaleX(var(--dir)) translateY(-8px);
+        animation-timing-function: ease-out;
+    }
+    78%{
+        transform: scaleX(var(--dir)) translateY(0);
+        animation-timing-function: ease-in;
+    }
+    90%{
+        transform: scaleX(var(--dir)) translateY(-3px);
+        animation-timing-function: ease-out;
+    }
+    100%{
+        transform: scaleX(var(--dir)) translateY(0);
+    }
+}
+
+/* -------------------- */
+/* Accessories (emoji overlay)                                          */
+/* -------------------- */
+
+#accessory-slot{
+    position: absolute;
+    pointer-events: none;
+    z-index: 8;
+    line-height: 1;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 34px;
+    height: 34px;
+}
+
+#accessory-slot.show{
+    display: flex;
+}
+
+#accessory-slot.accessory-hat{
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-6deg);
+    font-size: 40px;
+}
+
+#accessory-slot.accessory-crown{
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 45px;
+}
+
+#accessory-slot.accessory-glasses{
+    top: 16%;
+    left: 50%;
+    /* right: 100px; */
+    transform: translateX(-40%);
+    font-size: 70px;
+}
+
+#accessory-slot.accessory-bow{
+    top: -4px;
+    left: 68%;
+    transform: translateX(-50%) rotate(10deg);
+    font-size: 30px;
+}
+
+/* -------------------- */
+/* Mini Game — Catch Cookie */
+/* -------------------- */
+
+.game-bubble{
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-bottom: 8px;
+    width: 220px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) translateY(10px) scale(0.9);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 25;
+    background: var(--bubble-bg);
+    border-radius: var(--bubble-radius);
+    border: var(--bubble-border);
+    box-shadow: var(--bubble-shadow);
+    overflow: hidden;
+}
+
+.game-bubble.show{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.game-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    font-weight: 700;
+    font-size: 13px;
+    background: var(--game-header-bg);
+    color: var(--bubble-text);
+}
+
+#game-close{
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--bubble-muted-text);
+}
+
+#game-area{
+    position: relative;
+    height: 230px;
+    background: linear-gradient(var(--game-area-bg-start), var(--game-area-bg-end));
+    overflow: hidden;
+}
+
+#game-score{
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--game-score-text);
+    background: var(--game-score-bg);
+    padding: 2px 8px;
+    border-radius: 8px;
+    z-index: 2;
+}
+
+.falling-cookie{
+    position: absolute;
+    top: -24px;
+    font-size: 22px;
+    cursor: pointer;
+    animation: cookieFall linear forwards;
+    user-select: none;
+}
+
+@keyframes cookieFall{
+    to{ transform: translateY(240px); }
+}

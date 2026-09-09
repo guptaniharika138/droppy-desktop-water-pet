@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Pet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="pet-wrapper" class="float-enabled">
+
+    <div id="water-bubble" class="water-bubble">
+        <div class="bubble-content">
+            <span class="bubble-emoji">💧</span>
+            <p>Time to drink water!</p>
+            <div class="bubble-actions">
+                <button id="water-done">Done</button>
+                <button id="water-snooze">Later</button>
+            </div>
+        </div>
+        <div class="bubble-tail"></div>
+    </div>
+
+    <div id="reaction-bubble" class="water-bubble">
+        <div class="bubble-content">
+            <span class="bubble-emoji" id="reaction-emoji">😊</span>
+            <p id="reaction-text">Yum!!</p>
+        </div>
+        <div class="bubble-tail"></div>
+    </div>
+
+    <div id="sleep-bubble" class="sleep-bubble">
+        <div id="zzz-container"></div>
+    </div>
+
+    <div id="menu-bubble" class="menu-bubble">
+        <div class="menu-content">
+            <button class="menu-item" data-action="feed">🍪 Feed</button>
+            <button class="menu-item" data-action="drink">💧 Drink</button>
+            <button class="menu-item" data-action="sleep">😴 Sleep</button>
+            <hr class="menu-separator">
+             <button class="menu-item" data-action="Mini Games">🎮 Mini Games</button>
+            <button class="menu-item" data-action="throw-ball">1. 🎾 Throw Ball</button>
+            <!-- <hr class="menu-separator"> -->
+            <button class="menu-item" data-action="catch-cookie">2. 🍪 Catch Cookie</button>
+             <hr class="menu-separator">
+            <button class="menu-item" data-action="settings">⚙️ Settings</button>
+             <button class="menu-item" data-action="exit">❌ Exit</button>
+        </div>
+        <div class="bubble-tail"></div>
+    </div>
+
+    <div id="game-bubble" class="game-bubble">
+    <div class="game-header">
+        <span>🍪 Catch Cookie</span>
+        <button id="game-close">✖</button>
+    </div>
+    <div id="game-area">
+        <div id="game-score">Score: 0</div>
+    </div>
+</div>
+
+    <div id="pet-visual">
+        <img src="./assets/pet.png" id="pet">
+
+        <div class="eye-patch" id="patch-left"></div>
+        <div class="eye-patch" id="patch-right"></div>
+
+        <div class="eye-drawn" id="eye-left"></div>
+        <div class="eye-drawn" id="eye-right"></div>
+
+        <div class="eyelid-line" id="eyelid-left"></div>
+        <div class="eyelid-line" id="eyelid-right"></div>
+
+        <span id="accessory-slot"></span>
+
+        <div id="mood-badge">😊</div>
+    </div>
+
+    <div id="hearts"></div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

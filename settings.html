@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Settings</title>
+<style>
+    *{ box-sizing: border-box; }
+    body{
+        font-family: -apple-system, Segoe UI, sans-serif;
+        margin: 0;
+        padding: 18px 20px;
+        background: #fafafa;
+        color: #333;
+    }
+    h2{
+        margin: 0 0 16px 0;
+        font-size: 16px;
+    }
+    .section{
+        background: #fff;
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 14px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .section-title{
+        font-weight: 700;
+        font-size: 13px;
+        margin-bottom: 10px;
+        color: #444;
+    }
+    .radio-row{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 0;
+        font-size: 13px;
+        cursor: pointer;
+    }
+    .radio-row input{ cursor: pointer; }
+    .toggle-row{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+        padding: 4px 0;
+    }
+    .toggle-row input{
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+    .slider-row{
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    .slider-row input[type="range"]{
+        width: 100%;
+    }
+    .slider-value{
+        font-size: 12px;
+        color: #666;
+        text-align: right;
+    }
+    .sub-label{
+        font-size: 12px;
+        color: #666;
+        margin: 10px 0 4px 0;
+    }
+    .action-btn{
+        display: block;
+        width: 100%;
+        text-align: left;
+        border: none;
+        background: #f4f4f4;
+        padding: 9px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #333;
+        cursor: pointer;
+        margin-bottom: 8px;
+    }
+    .action-btn:hover{ background: #ebebeb; }
+    .action-btn:last-child{ margin-bottom: 0; }
+    .text-input{
+        width: 100%;
+        padding: 7px 9px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 13px;
+        font-family: inherit;
+        color: #333;
+        margin-top: 2px;
+    }
+    .text-input:focus{
+        outline: none;
+        border-color: #4fb0ff;
+    }
+    #statInteractions, #statWaterReminders, #statFeedCount, #statCurrentMood{
+        font-size: 13px;
+        color: #4fb0ff;
+    }
+</style>
+</head>
+<body>
+
+<h2>📊 Stats</h2>
+
+<div class="section">
+    <div class="toggle-row">
+        <span>Interactions Today</span>
+        <strong id="statInteractions">0</strong>
+    </div>
+    <div class="toggle-row">
+        <span>Water Reminders Sent</span>
+        <strong id="statWaterReminders">0</strong>
+    </div>
+    <div class="toggle-row">
+        <span>Feed Count</span>
+        <strong id="statFeedCount">0</strong>
+    </div>
+    <div class="toggle-row">
+        <span>Current Mood</span>
+        <strong id="statCurrentMood">😊 Happy</strong>
+    </div>
+</div>
+
+<h2>General</h2>
+
+<div class="section">
+    <div class="section-title">Pet Size</div>
+    <label class="radio-row"><input type="radio" name="petSize" value="small"> Small</label>
+    <label class="radio-row"><input type="radio" name="petSize" value="medium"> Medium</label>
+    <label class="radio-row"><input type="radio" name="petSize" value="large"> Large</label>
+</div>
+
+<div class="section">
+    <div class="toggle-row">
+        <span class="section-title" style="margin:0;">Always On Top</span>
+        <input type="checkbox" id="alwaysOnTop">
+    </div>
+</div>
+
+<div class="section">
+    <div class="toggle-row">
+        <span class="section-title" style="margin:0;">Start with Windows</span>
+        <input type="checkbox" id="startWithWindows">
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">Opacity</div>
+    <div class="slider-row">
+        <input type="range" id="opacity" min="30" max="100" value="100">
+        <div class="slider-value" id="opacityValue">100%</div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">Eyes</div>
+
+    <div class="sub-label">Blink Speed</div>
+    <label class="radio-row"><input type="radio" name="blinkSpeed" value="slow"> Slow</label>
+    <label class="radio-row"><input type="radio" name="blinkSpeed" value="normal"> Normal</label>
+    <label class="radio-row"><input type="radio" name="blinkSpeed" value="fast"> Fast</label>
+
+    <div class="toggle-row" style="margin-top: 10px;">
+        <span>Eye Movement</span>
+        <input type="checkbox" id="eyeMovement">
+    </div>
+
+    <div class="toggle-row">
+        <span>Double Blink</span>
+        <input type="checkbox" id="doubleBlink">
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">Interaction</div>
+
+    <div class="toggle-row">
+        <span>Jump on Click</span>
+        <input type="checkbox" id="jumpOnClick">
+    </div>
+
+    <div class="toggle-row">
+        <span>Hearts on Double Click</span>
+        <input type="checkbox" id="heartsOnDoubleClick">
+    </div>
+
+    <div class="toggle-row">
+        <span>Floating Animation</span>
+        <input type="checkbox" id="floatingAnimation">
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">Movement</div>
+
+    <div class="toggle-row">
+        <span>Enable Auto Walk</span>
+        <input type="checkbox" id="autoWalk">
+    </div>
+
+    <div class="toggle-row">
+        <span>Enable Random Walking</span>
+        <input type="checkbox" id="randomWalking">
+    </div>
+
+    <div class="toggle-row" style="margin-bottom: 10px;">
+        <span>Bounce at Screen Edges</span>
+        <input type="checkbox" id="bounceAtEdges">
+    </div>
+
+    <div class="sub-label">Walk Speed</div>
+    <label class="radio-row"><input type="radio" name="walkSpeed" value="slow"> Slow</label>
+    <label class="radio-row"><input type="radio" name="walkSpeed" value="normal"> Normal</label>
+    <label class="radio-row"><input type="radio" name="walkSpeed" value="fast"> Fast</label>
+</div>
+
+<div class="section">
+    <div class="section-title">Additional Controls</div>
+    <button class="action-btn" id="btnPause">Pause Movement</button>
+    <button class="action-btn" id="btnResume">Resume Movement</button>
+    <button class="action-btn" id="btnStay">Stay at Current Position</button>
+    <button class="action-btn" id="btnHome">Return to Home Position</button>
+</div>
+
+<div class="section">
+    <div class="section-title">Movement Mode</div>
+    <label class="radio-row"><input type="radio" name="movementMode" value="stay-still"> Stay Still</label>
+    <label class="radio-row"><input type="radio" name="movementMode" value="random-walk"> Random Walk</label>
+    <label class="radio-row"><input type="radio" name="movementMode" value="follow-mouse"> Follow Mouse</label>
+    <label class="radio-row"><input type="radio" name="movementMode" value="patrol-screen"> Patrol Screen</label>
+    <label class="radio-row"><input type="radio" name="movementMode" value="sleep-spot"> Sleep Spot</label>
+</div>
+
+<div class="section">
+    <div class="section-title">Mood</div>
+
+    <div class="toggle-row" style="margin-bottom: 10px;">
+        <span>Mood System</span>
+        <input type="checkbox" id="moodSystem">
+    </div>
+
+    <div class="sub-label">Sleep After</div>
+    <label class="radio-row"><input type="radio" name="sleepAfter" value="30sec"> 30 sec</label>
+    <label class="radio-row"><input type="radio" name="sleepAfter" value="1min"> 1 min</label>
+    <label class="radio-row"><input type="radio" name="sleepAfter" value="5min"> 5 min</label>
+    <label class="radio-row"><input type="radio" name="sleepAfter" value="never"> Never</label>
+
+    <div class="toggle-row" style="margin-top: 10px;">
+        <span>Wake on Mouse</span>
+        <input type="checkbox" id="wakeOnMouse">
+    </div>
+</div>
+
+<div class="section">
+    <div class="section-title">💧 Water Reminder</div>
+
+    <div class="toggle-row" style="margin-bottom: 10px;">
+        <span>Enable Reminder</span>
+        <input type="checkbox" id="reminderEnabled">
+    </div>
+
+    <div class="sub-label">Reminder Every</div>
+    <label class="radio-row"><input type="radio" name="reminderInterval" value="15"> 15 min</label>
+    <label class="radio-row"><input type="radio" name="reminderInterval" value="30"> 30 min</label>
+    <label class="radio-row"><input type="radio" name="reminderInterval" value="45"> 45 min</label>
+    <label class="radio-row"><input type="radio" name="reminderInterval" value="60"> 1 hour</label>
+
+    <div class="sub-label">Reminder Message</div>
+    <input type="text" class="text-input" id="reminderMessage" placeholder="💧 Drink Water!" maxlength="60">
+</div>
+
+<div class="section">
+    <div class="section-title">🍪 Feed</div>
+
+    <div class="sub-label">Favorite Food</div>
+    <label class="radio-row"><input type="radio" name="favoriteFood" value="cookie"> 🍪 Cookie</label>
+    <label class="radio-row"><input type="radio" name="favoriteFood" value="apple"> 🍎 Apple</label>
+    <label class="radio-row"><input type="radio" name="favoriteFood" value="carrot"> 🥕 Carrot</label>
+    <label class="radio-row"><input type="radio" name="favoriteFood" value="bone"> 🦴 Bone</label>
+</div>
+
+<div class="section">
+    <div class="section-title">🎨 Appearance</div>
+
+    <div class="sub-label">Theme</div>
+    <label class="radio-row"><input type="radio" name="theme" value="light"> 🌞 Light</label>
+    <label class="radio-row"><input type="radio" name="theme" value="dark"> 🌙 Dark</label>
+    <label class="radio-row"><input type="radio" name="theme" value="midnight"> 🌌 Midnight</label>
+    <label class="radio-row"><input type="radio" name="theme" value="pastel"> 🌸 Pastel</label>
+    <label class="radio-row"><input type="radio" name="theme" value="nature"> 🌿 Nature</label>
+    <label class="radio-row"><input type="radio" name="theme" value="custom"> 🎨 Custom</label>
+
+    <div id="customColorsRow" style="display:none; flex-direction:column; gap:8px; margin-top:10px; padding-top:10px; border-top:1px solid #eee;">
+        <label style="display:flex; justify-content:space-between; align-items:center; font-size:12px;">
+            Primary Color
+            <input type="color" id="customPrimaryColor" value="#4fb0ff">
+        </label>
+        <label style="display:flex; justify-content:space-between; align-items:center; font-size:12px;">
+            Bubble Color
+            <input type="color" id="customBubbleColor" value="#ffffff">
+        </label>
+        <label style="display:flex; justify-content:space-between; align-items:center; font-size:12px;">
+            Background Color
+            <input type="color" id="customBackgroundColor" value="#f5f5f5">
+        </label>
+    </div>
+
+    <div class="sub-label" style="margin-top: 14px;">💬 Bubble Style</div>
+    <label class="radio-row"><input type="radio" name="bubbleStyle" value="cloud"> ☁️ Cloud</label>
+    <label class="radio-row"><input type="radio" name="bubbleStyle" value="speech"> 💬 Speech</label>
+    <label class="radio-row"><input type="radio" name="bubbleStyle" value="thought"> 💭 Thought</label>
+    <label class="radio-row"><input type="radio" name="bubbleStyle" value="modern"> 🎨 Modern</label>
+    <label class="radio-row"><input type="radio" name="bubbleStyle" value="minimal"> ✨ Minimal</label>
+</div>
+
+
+<div class="section">
+    <div class="section-title">🎒 Accessories</div>
+    <label class="radio-row"><input type="radio" name="accessory" value="none"> None</label>
+    <label class="radio-row"><input type="radio" name="accessory" value="hat"> 🎩 Hat</label>
+    <label class="radio-row"><input type="radio" name="accessory" value="glasses"> 🕶 Glasses</label>
+    <label class="radio-row"><input type="radio" name="accessory" value="bow"> 🎀 Bow</label>
+    <!-- <label class="radio-row"><input type="radio" name="accessory" value="headphones"> 🎧 Headphones</label> -->
+    <label class="radio-row"><input type="radio" name="accessory" value="crown"> 👑 Crown</label>
+</div>
+
+<div class="section">
+    <div class="section-title">🐾 Skin</div>
+    <label class="radio-row"><input type="radio" name="skin" value="default"> 💧 Droppy (Default)</label>
+    <label class="radio-row"><input type="radio" name="skin" value="dog"> 🐶 Dog</label>
+    <label class="radio-row"><input type="radio" name="skin" value="cat"> 🐱 Cat</label>
+    <label class="radio-row"><input type="radio" name="skin" value="panda"> 🐼 Panda</label>
+    <label class="radio-row"><input type="radio" name="skin" value="frog"> 🐸 Frog</label>
+</div>
+
+<div class="section" style="text-align:center; color:#999;">
+    <div style="font-weight:700; font-size:13px; color:#555; margin-bottom:4px;">ℹ️ Droppy v3.0</div>
+    <div style="font-size:12px;">Made with ❤️ using Electron.js</div>
+</div>
+
+<script src="settingsScript.js"></script>
+
+</body>
+</html>
